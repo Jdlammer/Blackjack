@@ -1,3 +1,5 @@
+SUITS = ['Clubs', 'Spades', 'Hearts', 'Diamonds']
+RANKS = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 class Card:
     def __init__(self,rank,suit,id):
         self.rank = rank
@@ -18,6 +20,7 @@ class Card:
 
 
 
+
 class Hand:
     def __init__(self):
         self.cards = []
@@ -32,5 +35,11 @@ class Hand:
 
 
 class Deck:
+
+   def __init__(self):
+       self.cards = []
+       for suit in SUITS:
+           for rank in RANKS:
+               self.cards.append(rank,suit)
 class Play:
-class CardLabel:
+
