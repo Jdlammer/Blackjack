@@ -63,14 +63,13 @@ class Play:
     DealerHand.add_card(myDeck.deal_card())
     PlayerHand.add_card(myDeck.deal_card())
     DealerHand.add_card(myDeck.deal_card())
-    DealerHand.add_card(myDeck.deal_card())
     #while in_play:
-    if (DealerHand.get_value() or PlayerHand.get_value()) > 21:
+    if DealerHand.get_value() > PlayerHand.get_value():
         print("You Lose!")
         print(PlayerHand.get_value())
         print(DealerHand.get_value())
     else:
-        print("Test")
+        print("You Win!")
         print(PlayerHand.get_value())
         print(DealerHand.get_value())
 
