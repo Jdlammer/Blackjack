@@ -1,3 +1,5 @@
+import random
+
 SUITS = ['Clubs', 'Spades', 'Hearts', 'Diamonds']
 RANKS = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 class Card:
@@ -17,6 +19,8 @@ class Card:
         return self.suit
     def get_id(self):
         return self.id
+    def is_ace(self):
+        return self.rank == 'A'
 
 
 
@@ -25,11 +29,22 @@ class Hand:
     def __init__(self):
         self.cards = []
     def add_card(self, card):
-        return self.cards.append(card)
+        self.cards.append(card)
+        return self.cards
     def get_value(self):
         total = 0
         for i in self.cards:
             total += i
+        return total
+    def get_soft_value(self):
+        total = 0
+        for i in self.cards:
+            if i.is_ace():
+                total += 1
+            else:
+                total += i
+        return total
+
 
 
 
@@ -41,5 +56,7 @@ class Deck:
        for suit in SUITS:
            for rank in RANKS:
                self.cards.append(rank,suit)
+    def shuffle(self):
+        return random.shuffle(self.cards)
 class Play:
 
