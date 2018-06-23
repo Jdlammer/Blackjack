@@ -37,25 +37,25 @@ class Card:
 
 class Hand:
     def __init__(self):
-        self.cards = []
+        self.hand = []
     def add_card(self, card):
-        self.cards.append(card)
-        return self.cards
+        self.hand.append(card)
+        return self.hand
     def __str__(self):
-        for i in self.cards:
+        for i in self.hand:
             if i is self.is_hidden:
                 return "[?]"
             else:
                 return "["+self.rank+ " of " + self.suit+"]"
     def get_value(self):
         total = 0
-        for i in self.cards:
+        for i in self.hand:
             val = i.point
             total += val
         return total
     def get_soft_value(self):
         total = 0
-        for i in self.cards:
+        for i in self.hand:
             if i.is_ace():
                 total += 1
             else:
@@ -71,6 +71,36 @@ class Deck:
     def deal_card(self):
         card = self.cards.pop()
         return card
+    def __str__(self):
+        for i in self.cards:
+            return "["+self.rank+ " of " + self.suit+"]"
+
+class Dealer(Hand):
+    def __init__(self,name,deck):
+        super().__init__(self)
+        self.name = name
+        self.deck = deck
+        self.isBust = False
+    def show_hand(self):
+        for i in self.hand:
+            print (i)
+    def hit(self):
+        print ("Hit")
+        self.add_card(self.deck.deal_card())
+        return self.hand
+    def stand(self):
+        if self.get_value() < 21:
+            print ("Stay. You got "+ self.get_value())
+        else:
+            if self.get_soft_value() < 21:
+                print ("Stay. You got "+ self.get_soft_value())
+    def bust(self):
+        if self.get_soft_value() > 21:
+            self.isBust = True
+            print ("Busted")
+        else:
+            self.stand()
+
 
 
 
