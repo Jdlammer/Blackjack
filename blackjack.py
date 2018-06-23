@@ -14,6 +14,8 @@ class Card:
             self.point = 10
         else:
             self.point = int(rank)
+        self.is_hidden = False
+
     def get_rank(self):
         return self.rank
     def get_suit(self):
@@ -22,6 +24,16 @@ class Card:
         return self.id
     def is_ace(self):
         return self.rank == 'A'
+    def hide(self):
+        self.is_hidden = True
+    def show(self):
+        self.is_hidden = False
+    def __str__(self):
+        if self.is_hidden:
+            return "[?]"
+        else:
+            return "["+self.rank+" of "+ self.suit+"]"
+
 
 class Hand:
     def __init__(self):
@@ -29,6 +41,12 @@ class Hand:
     def add_card(self, card):
         self.cards.append(card)
         return self.cards
+    def __str__(self):
+        for i in self.cards:
+            if i is self.is_hidden:
+                return "[?]"
+            else:
+                return "["+self.rank+ " of " + self.suit+"]"
     def get_value(self):
         total = 0
         for i in self.cards:
@@ -53,6 +71,14 @@ class Deck:
     def deal_card(self):
         card = self.cards.pop()
         return card
+
+
+
+
+
+
+
+
 
 class Play:
     myDeck = Deck()
